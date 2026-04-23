@@ -10,13 +10,14 @@ int isPalindrome(char* s) {
     if (s[i] == '\0') {
       break;
     }
+    // возможно стоит проверять после перевода в нижний регистр
     if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') ||
         (s[i] >= '0' && s[i] <= '9')) {
       sizeTmp++;
     }
     sizeS++;
   }
-  // sizeS++;
+  if (sizeTmp < 2) return 1;
   char tmp[sizeTmp];
   int count = 0;
   for (int i = 0; i < sizeS; i++) {
@@ -30,9 +31,9 @@ int isPalindrome(char* s) {
     }
   }
 
-  /* for (int i = 0; i < sizeTmp; i++) {
+  for (int i = 0; i < sizeTmp; i++) {
     printf("%c\n", tmp[i]);
-  } */
+  }
 
   for (int i = 0; i < sizeTmp; i++) {
     if (tmp[i] != tmp[sizeTmp - i - 1]) {
@@ -46,10 +47,10 @@ int isPalindrome(char* s) {
 }
 
 int main(void) {
-  char s1[6] = {'h', 'e', 'l', 'l', 'o'};
+  char s1[3] = {'a', 'b'};
   char s2[5] = {'h', 'e', 'e', 'H'};
   char s3[6] = {'h', 'e', 'd', ':', 'h'};
-  char s4[9] = {'h', 'e', 'd', ':', 'd', ',', 'e', 'h'};
+  char s4[11] = {'r', 'a', 'c', 'e', ' ', 'a', ' ', 'c', 'a', 'r'};
 
   printf("Result: %d\n", isPalindrome(s1));
   printf("Result: %d\n", isPalindrome(s2));
@@ -58,3 +59,15 @@ int main(void) {
 
   return 0;
 }
+
+/* Интересный подход с комментариев на Литкод
+
+    while (left < right) {
+  if (s.charAt(left) != s.charAt(right)) {
+    return false;
+  }
+  left++;
+  right--;
+}
+return true;
+} */
