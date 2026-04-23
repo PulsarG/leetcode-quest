@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/valid-palindrome/?envType=problem-list-v2&envId=two-pointers
+
 #include <stdio.h>
 #include <ctype.h>
 
