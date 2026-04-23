@@ -1,16 +1,23 @@
-all: aa
+CC = gcc
+CFLAGS = -std=c11 -Wall -Wextra -Werror
 
-a: 
-	././a.out
+all: run
 
-	# Находим все .out файлы рекурсивно
-EXECUTABLES := $(shell find . -name "*.out" -type f)
+%: %.c
+	$(CC) $(CFLAGS) $< -o a.out
 
-.PHONY: run-all
+run:
+	@find . -name "*.out" -type f -exec echo "Running {}..." \; -exec chmod +x {} \; -exec ./{} \;
 
-aa:
-	@for exec in $(EXECUTABLES); do \
-		echo "Running $$exec..."; \
-		chmod +x $$exec; \
-		./$$exec; \
-	done
+clean:
+	rm -f a.out
+
+cpp:
+	cppcheck --enable=all --suppress=missingIncludeSystem .
+
+st:
+	clang-format -n *.c
+	clang-format -i *.c
+
+val:
+	valgrind --tool=memcheck --leak-check=yes ./a.out
